@@ -26,13 +26,16 @@ let urlUpdate (result: Option<Page>) model =
 let init result =
   let (counter, counterCmd) = Counter.State.init()
   let (home, homeCmd) = Home.State.init()
+  let (photoapp, photoappCmd) = PhotoApp.State.init()
   let (model, cmd) =
     urlUpdate result
       { currentPage = Home
         counter = counter
+        photoapp = photoapp
         home = home }
   model, Cmd.batch [ cmd
                      Cmd.map CounterMsg counterCmd
+                     Cmd.map PhotoAppMsg photoappCmd
                      Cmd.map HomeMsg homeCmd ]
 
 let update msg model =
@@ -40,6 +43,9 @@ let update msg model =
   | CounterMsg msg ->
       let (counter, counterCmd) = Counter.State.update msg model.counter
       { model with counter = counter }, Cmd.map CounterMsg counterCmd
+  | PhotoAppMsg msg ->
+      let (photoapp, photoappCmd) = PhotoApp.State.update msg model.photoapp
+      { model with photoapp = photoapp }, Cmd.map PhotoAppMsg photoappCmd    
   | HomeMsg msg ->
       let (home, homeCmd) = Home.State.update msg model.home
       { model with home = home }, Cmd.map HomeMsg homeCmd

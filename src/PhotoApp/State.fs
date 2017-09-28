@@ -16,10 +16,10 @@ let album = {
 
 let urlPrefix = "http://elm-in-action.com/"
 
-let init() : Model = album
-
 // UPDATE
-let update (msg:Msg) (model:Model) =
+let update msg model : Model * Cmd<Msg>   =
   match msg with 
-  | (SelectedUrl x) -> {model with selectedUrl = x}    
-  //| _ -> model
+  | (SelectedUrl x) -> {model with selectedUrl = x}, []    
+  
+
+let init() : Model * Cmd<Msg>  = album, [] 
