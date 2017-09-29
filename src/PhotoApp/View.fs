@@ -13,6 +13,7 @@ open Elmish.React
 open Types
 open State
 
+
 // VIEW (rendered with React)
 let root model dispatch =
  
@@ -23,10 +24,26 @@ let root model dispatch =
               OnClick (fun _ -> dispatch (SelectedUrl thumbnail.url))
         ]
 
+
+  let sizeToString (size: ThumbnailSize) =
+      match size with
+      | Small -> "small"
+      | Medium -> "med"
+      | Large -> "large"
+
+  let viewSizeChooser (size : ThumbnailSize) =
+      label []
+            [ input [Typeof "radio"
+                     name "size" ] []
+              str (sizeToString size)
+             ]
+
   div [] [
         br [] 
         h1 [ClassName "content"] [  str "Photo Groove"]
-        br []
+        button [ClassName "button"
+                Id "button2"
+                OnClick (fun _ -> dispatch (SelectedUrl "2.jpeg"))] [str "Surprise Me!"]
         div [Id "thumbnails" ] (model.photos |> List.map (viewThumbnail model.selectedUrl)) 
         img [ClassName "large"
              Src (urlPrefix + "large/" + model.selectedUrl)]   

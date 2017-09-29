@@ -12,6 +12,7 @@ let photoAlbum = [
 let album = {
     photos = photoAlbum
     selectedUrl = "1.jpeg"
+    chosenSize = Medium
     }
 
 let urlPrefix = "http://elm-in-action.com/"
@@ -19,7 +20,8 @@ let urlPrefix = "http://elm-in-action.com/"
 // UPDATE
 let update msg model : Model * Cmd<Msg>   =
   match msg with 
-  | (SelectedUrl x) -> {model with selectedUrl = x}, []    
+  | (SelectedUrl x) -> {model with selectedUrl = x}, [] 
+  | (RandomUrl x) -> {model with selectedUrl = x}, []   
   
 
 let init() : Model * Cmd<Msg>  = album, [] 
