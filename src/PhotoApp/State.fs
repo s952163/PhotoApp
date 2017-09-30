@@ -12,7 +12,7 @@ let photoAlbum = [
 let album = {
     photos = photoAlbum
     selectedUrl = "1.jpeg"
-    chosenSize = Medium
+    chosenSize = Small
     }
 
 let urlPrefix = "http://elm-in-action.com/"

@@ -42,11 +42,8 @@ let root model dispatch =
                 Id "button2"
                 OnClick (fun _ -> dispatch (SelectedUrl "2.jpeg"))] [str "Surprise Me!"]
         h3 [] [ str "Thumbnail Size:" ]
-        div [Id "choose-size"] 
-            [viewSizeChooser Small
-             viewSizeChooser Medium
-             viewSizeChooser Large]
-        div [Id "thumbnails" ] (model.photos |> List.map (viewThumbnail model.selectedUrl)) 
+        div [Id "choose-size"] ([Small; Medium; Large] |> List.map viewSizeChooser) 
+        div [Id "thumbnails"; ClassName (sizeToString model.chosenSize) ] (model.photos |> List.map (viewThumbnail model.selectedUrl)) 
         img [ClassName "large"
              Src (urlPrefix + "large/" + model.selectedUrl)]   
         br []
